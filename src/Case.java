@@ -1,9 +1,13 @@
 
 public class Case {
 	
-	public int hauteur;
+	public float hauteur;
 	public int arbre;
 	public int fertilite;
-	public int moisture;
+	public float moisture;
+	public float temp;
+	public int x;
+	public int y;
+	public int type;
 
 }

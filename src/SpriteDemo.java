@@ -19,6 +19,8 @@ public class SpriteDemo extends JPanel {
 	private Image waterSprite;
 	private Image grassSprite;
 	private Image treeSprite;
+	private Image snowSprite;
+	private Image sandSprite;
 	
 	private int spriteLength = 32;
 	
@@ -31,6 +33,9 @@ public class SpriteDemo extends JPanel {
 			waterSprite = ImageIO.read(new File("water.png"));
 			treeSprite = ImageIO.read(new File("tree.png"));
 			grassSprite = ImageIO.read(new File("grass.png"));
+			snowSprite = ImageIO.read(new File("snow.png"));
+			sandSprite = ImageIO.read(new File("sand.png"));
+
 		}
 		catch(Exception e)
 		{
@@ -40,14 +45,14 @@ public class SpriteDemo extends JPanel {
 
 		frame = new JFrame("World of Sprite");
 		frame.add(this);
-		frame.setSize(300,300);
+		frame.setSize(1024,1024);
 		frame.setVisible(true);
 		
-		myWorld = new int[8][8];
+		myWorld = new int[32][32];
 		
-		for ( int i = 0 ; i != 8 ; i++ )
-			for ( int j = 0 ; j != 8 ; j++ )
-				myWorld[i][j] = (int)(Math.random()*3.0);
+		for ( int i = 0 ; i != 32 ; i++ )
+			for ( int j = 0 ; j != 32 ; j++ )
+				myWorld[i][j] = (int)(Math.random()*6.0);
 	}
 
 	public void paint(Graphics g)
@@ -61,8 +66,18 @@ public class SpriteDemo extends JPanel {
 				else
 					if ( myWorld[i][j] == 1 )
 						g2.drawImage(treeSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-					else	
+				else
+					if(myWorld[i][j]==2)
+						g2.drawImage(snowSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				else
+					if ( myWorld[i][j] == 3 )
+						g2.drawImage(treeSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				else
+					if ( myWorld[i][j] == 4 )
 						g2.drawImage(grassSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				
+					else	
+						g2.drawImage(sandSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 					
 			}
 	}

@@ -24,8 +24,8 @@ public class World {
 		buffering = __buffering;
 		cloneBuffer = __cloneBuffer;
 		
-		Buffer0 = new Case[_dx][_dy][3];
-		Buffer1 = new Case[_dx][_dy][3];
+		Buffer0 = new int[_dx][_dy][3];
+		Buffer1 = new int[_dx][_dy][3];
 		activeIndex = 0;
 		
 		agents = new ArrayList<Agent>();
