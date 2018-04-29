@@ -13,6 +13,8 @@ public class Island {
 	private Image MoistureMap;
 	private Image HeightMap;
 	private Image TempMap;
+	
+	private int spriteLength = 32;
 
 	public int dx;
 	public int dy;
@@ -42,12 +44,17 @@ public class Island {
 
 		this.myWorld = new Case [dx][dy];
 		frame = new JFrame("World of Sprite");
-		frame.add(this.myWorld);
+		frame.add(this);
 		frame.setSize(1024,1024);
 		frame.setVisible(true);
 
 	}
-	
+	public void initMonde(int nbpred, int nbproies){
+		
+		for ( int i = 0 ; i != dx ; i++ )
+			for ( int j = 0 ; j != dy ; j++ )
+				myWorld[i][j] = initCase();
+	}
 	
 
 }
