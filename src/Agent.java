@@ -1,7 +1,7 @@
 
 public abstract class Agent {
 
-	World _world;
+	Island _world;
 	
 	static int redId   = 0;
 	static int greenId = 1;
@@ -16,7 +16,7 @@ public abstract class Agent {
 	int 	_greenValue;
 	int 	_blueValue;
 	
-	public Agent( int __x, int __y, World __w )
+	public Agent( int __x, int __y, Island __w )
 	{
 		_x = __x;
 		_y = __y;
@@ -32,3 +32,55 @@ public abstract class Agent {
 	abstract public void step( );
 	
 }
+
+public int Voisinage() {//identifie la direction de la première intrusion trouvée
+	if(getClass().getName()=="PreyAgent") {
+	
+		for ( int i = 0 ; i != _world.Predateurs.size() ; i++ ){
+			
+				if(_world.Predateurs.get(i)._x ==_x && _world.Predateurs.get(i)._y ==_y-1 ){ //intrus en haut  
+					return 0;
+				}
+				else if(_world.Predateurs.get(i)._x ==_x+1 && _world.Predateurs.get(i)._y ==_y) {//intrus a l'est
+					return 1;	
+				}
+				else if(_world.Predateurs.get(i)._x ==_x && _world.Predateurs.get(i)._y ==_y+1) {//intrus au sud
+					return 2;	
+				}
+				else if(_world.Predateurs.get(i)._x ==_x-1 && _world.Predateurs.get(i)._y ==_y) {//intrus a l'ouest
+					return 3;	
+				}
+			}
+	}
+		
+		if(getClass().getName()=="PredatorAgent") {
+			
+			for ( int i = 0 ; i != _world.Proies.size() ; i++ ){
+					if(_world.Proies.get(i)._x ==_x && _world.Proies.get(i)._y ==_y-1 ){ //intrus en haut  
+						return 0;
+					}
+					else if(_world.Proies.get(i)._x ==_x+1 && _world.Proies.get(i)._y ==_y) {//intrus a l'est
+						return 1;	
+					}
+					else if(_world.Proies.get(i)._x ==_x && _world.Proies.get(i)._y ==_y+1) {//intrus au sud
+						return 2;	
+					}
+					else if(_world.Proies.get(i)._x ==_x-1 && _world.Proies.get(i)._y ==_y) {//intrus a l'ouest
+						return 3;	
+					}
+				}
+			
+		}
+		
+	
+	 return -1;
+}
+
+ public boolean Chasse() {
+	return (Voisinage() != -1);
+}
+
+
+
+}
+

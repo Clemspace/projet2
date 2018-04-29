@@ -2,6 +2,8 @@
 public class PreyAgent extends Agent {
 
 	boolean _alive;
+	boolean chasse;
+	int corpse;
 	
 	public PreyAgent( int __x, int __y, World __w )
 	{
@@ -12,12 +14,22 @@ public class PreyAgent extends Agent {
 		_blueValue = 255;
 		
 		_alive = true;
+		chasse = false;
+		corpse = 0;
 	}
 	
 	public void step( )
 	{
 		// met a jour l'agent
-		
+		for (int i = 0; i!=_world.Predateurs.size();i++) {
+			if ( _x == _world.Predateurs.get(i)._x && _y == _world.Predateurs.get(i)._y) {    // proie sur la même case que prédateur, 
+																							  //nourrit le prédateur
+				_alive = false;
+				_world.Predateurs.get(i).faim =50; 
+				
+				
+			}
+		}
 		// ... A COMPLETER
 
 		int cellColor[] = _world.getCellState(_x, _y);
@@ -27,10 +39,18 @@ public class PreyAgent extends Agent {
 		cellColor[blueId]  = 255;
 
 		_world.setCellState(_x, _y, cellColor);
-
-		if (Math.random() > 0.5) // au hasard
+		
+		
+	
+			
+		
+		if(Chasse()) { //comportement de chasse, va chercher a fuir
+			_orient= Voisinage()+2;
+			
+		}
+		else if (Math.random() > 0.5) // au hasard
 			_orient = (_orient + 1) % 4;
-		else
+		else 
 			_orient = (_orient - 1 + 4) % 4;
 
 		// met a jour: la position de l'agent (depend de l'orientation)
@@ -48,6 +68,8 @@ public class PreyAgent extends Agent {
 			_x = (_x - 1 + _world.getWidth()) % _world.getWidth();
 			break;
 		}
+		
+				
 		
 	}
 	
