@@ -68,6 +68,7 @@ public class CAImageBuffer extends ImageBuffer {
 			{	
 				switch(cells[x][y].type) {
 				
+				case -1://CAS OCEAN
 				
 				case 0: //CAS EAU
 					this.setPixel(x,y,0,200-cells[x][y].volWater,255);

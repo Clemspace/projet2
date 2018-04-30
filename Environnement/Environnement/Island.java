@@ -247,8 +247,24 @@ public class Island {
 				
 				this.Buffer0[x][y].temp = (int)(tm.getRGB(x, y) & 0x0000FF)/255*100;
 				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y) & 0x0000FF)/255*100;
-	
+				this.Buffer0[x][y].moisture = (int)(mm.getRGB(x, y) & 0x0000FF)/255*100;
+				
+				if (Buffer0[x][y].hauteur<10) {
+					Buffer0[x][y].type = -1;
+					Buffer0[x][y].volWater = 100;
+				}
+				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) {
+					Buffer0[x][y].type = 4;
+
+				}
+				else Buffer0[x][y].type = 1;
+				
 			}
+		//puis on initialise le type de chaque case
+		
+		for ( int x = 0 ; x != _dx ; x++ )
+			for ( int y = 0 ; y != _dy ; y++ ) 
+			{
 				
 		
 	}
