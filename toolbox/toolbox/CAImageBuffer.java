@@ -89,7 +89,7 @@ public class CAImageBuffer extends ImageBuffer {
 					this.setPixel(x,y,200,255,200);
 					break;
 				
-				this.setPixel(x, y, cells[x][y].color[0], cells[x][y].color[1], cells[x][y].color[2] );
+				//this.setPixel(x, y, cells[x][y].color[0], cells[x][y].color[1], cells[x][y].color[2] );
 				}
 			}
 				

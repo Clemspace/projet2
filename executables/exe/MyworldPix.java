@@ -11,15 +11,15 @@ import toolbox.ImageBuffer;
 import toolbox.ImageFrame;
 import toolbox.CAImageBuffer;
 
-public class MyworldPix extends CAImageBuffer {
+public class MyworldPix {
 
 	public static void main(String[] args) {
 		
 		
 		// initialisation generale
-	    
-				int dx = 1024;
-				int dy = 1024;
+	    		double densite = 0.3;
+				int dx = 512;
+				int dy = 512;
 				
 				int displayWidth = dx;  // 200
 				int displayHeight = dy; // 200
@@ -65,15 +65,18 @@ public class MyworldPix extends CAImageBuffer {
 
 			    
 				Island world = new Island(dx,dy);
-				world.InitIsland(HeightMap,MoistureMap,TempMap);
+				world.InitIsland(HeightMap,MoistureMap,TempMap, densite);
+				world.display(image); 
+
+				
 				
 				
 
 				
 				for ( int i = 0 ; i != 10 ; i++ )
-					world.Proies.add(new PreyAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
+					world.agents.add(new PreyAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 				for ( int i = 0 ; i != 10 ; i++ )
-					world.Predateurs.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
+					world.agents.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 				
 			    // mise a jour de l'�tat du monde
 				
