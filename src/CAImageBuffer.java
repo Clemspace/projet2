@@ -1,5 +1,5 @@
 
-import java.awt.Color;
+import java.awt.Color;cells[x][y]
 
 public class CAImageBuffer extends ImageBuffer {
 
@@ -52,6 +52,35 @@ public class CAImageBuffer extends ImageBuffer {
 				
 	}
 	
+	public void update (Case[][] cells)
+	{
+		if ( cells.length != this.getWidth() || cells[0].length != this.getHeight() )
+		{
+			System.err.println("array size does not match with image size.");
+			System.exit(-1);
+		}
+		
+		for ( int y = 0 ; y != cells[0].length ; y++ )
+			for ( int x = 0 ; x != cells.length ; x++ )
+			{	
+				switch(cells[x][y].type) {
+				
+				
+				case 0: //CAS EAU
+					this.setPixel(x,y,0,200-cells[x][y].volWater,255);
+					break;
+				case 1: //CAS SABLE
+					this.setPixel(x,y,255,255-cells[x][y].moisture,0);
+					break;
+				case 2: //CAS FORET
+					this.setPixel(x,y,0,200-cells[x][y].arbre,0);
+					break;
+				case 3: // 	
+				this.setPixel(x, y, cells[x][y].color[0], cells[x][y].color[1], cells[x][y].color[2] );
+				}
+			}
+				
+	}
 	
 	/**
 	 * update first line of image to value in array[] (1D). All image is moved one line downwards prior to update.

@@ -1,13 +1,13 @@
 
-public class MyworldPix extends CAtoolBox {
+public class MyworldPix extends CAtoolbox {
 
 	public static void main(String[] args) {
 		
 		
 		// initialisation generale
 	    
-				int dx = 128;
-				int dy = 128;
+				int dx = 1024;
+				int dy = 1024;
 				
 				int displayWidth = dx*8;  // 200
 				int displayHeight = dy*8; // 200
@@ -37,11 +37,15 @@ public class MyworldPix extends CAtoolBox {
 				int displaySpeed = 1;//50; // from 1 to ...
 				
 				CAImageBuffer image = new CAImageBuffer(dx,dy);
-			    ImageFrame imageFrame =	ImageFrame.makeFrame( "My Ecosystem", image, delai, displayWidth, displayHeight );
+			    ImageFrame imageFrame =	ImageFrame.makeFrame( "MonkiIsland", image, delai, displayWidth, displayHeight );
 
 			    // initialise l'ecosysteme
 			    
-				Island world = new Island(dx,dy,true,true);
+
+			    
+				Island world = new Island(dx,dy);
+				MoistureMap = loadFromDisk("Moisture.png");
+
 				
 				for ( int i = 0 ; i != 10 ; i++ )
 					world.Proies.add(new PreyAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));

@@ -53,10 +53,10 @@ public class IslandDemo extends JPanel {
 	public void paint(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D)g;
-		for ( int i = 0 ; i < myWorld.dx ; i++ )
-			for ( int j = 0 ; j < myWorld.dy ; j++ )
+		for ( int i = 0 ; i < myWorld._dx ; i++ )
+			for ( int j = 0 ; j < myWorld._dy ; j++ )
 			{
-				if ( myWorld[i][j] == 0 )
+				if ( myWorld[i][j]. == 0 )
 					g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				else
 					if ( myWorld[i][j] == 1 )

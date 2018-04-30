@@ -31,7 +31,7 @@ public abstract class Agent {
 	
 	abstract public void step( );
 	
-}
+
 
 public int Voisinage() {//identifie la direction de la première intrusion trouvée
 	if(getClass().getName()=="PreyAgent") {

@@ -5,7 +5,7 @@ public class PreyAgent extends Agent {
 	boolean chasse;
 	int corpse;
 	
-	public PreyAgent( int __x, int __y, World __w )
+	public PreyAgent( int __x, int __y, Island __w )
 	{
 		super(__x,__y,__w);
 		

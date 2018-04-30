@@ -10,9 +10,9 @@ import javax.swing.JFrame;
 public class Island {
 	
 	
-	private Image MoistureMap;
-	private Image HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
-	private Image TempMap;
+	private CAImageBuffer MoistureMap;
+	private CAImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
+	private CAImageBuffer TempMap;
 	
 
 	public int _dx;
@@ -32,11 +32,18 @@ public class Island {
 
 	
 	public Island(int _dx, int _dy){
+		
+		
 		try
 		{
-			this.MoistureMap = ImageIO.read(new File("moisture.png"));
-			this.HeightMap = ImageIO.read(new File("island.png"));	//initialisation des données pour la création de l'ile
-			this.TempMap = ImageIO.read(new File("temper.png"));
+			File Height = new File("island.png");
+			File Moist = new File("moisture.png");
+			File Temp = new File("temper.png");
+
+			MoistureMap = new CAImageBuffer();//new ImageBuffer(1024,1024); // method 1 : call constructor
+			HeightMap =null; //new ImageBuffer(1024,1024);	//initialisation des données pour la création de l'ile
+			TempMap =null;//new ImageBuffer(1024,1024);
+			//MoistureMap = loadFromDisk("moisture.png");
 
 		}
 		catch(Exception e)
@@ -48,6 +55,9 @@ public class Island {
 		this._dx = _dx;
 		this._dy = _dy;
 		agents = new ArrayList<Agent>();
+		Predateurs = new ArrayList<PredatorAgent>();
+		Proies = new ArrayList<PreyAgent>();
+
 		Buffer0 = new Case [_dx][_dy];
 		Buffer1 = new Case [_dx][_dy];
 
@@ -239,6 +249,17 @@ public class Island {
 
 		for ( int i = 0 ; i != agents.size() ; i++ )
 			image.setPixel(agents.get(i)._x, agents.get(i)._y, agents.get(i)._redValue, agents.get(i)._greenValue, agents.get(i)._blueValue);
+	}
+	public void initImage(CAImageBuffer image, File hm, File mm,File tm) {
+		
+		for ( int x = 0 ; x != _dx ; x++ )
+			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
+			{
+				hm.
+				
+			}
+				
+		
 	}
 	
 }
