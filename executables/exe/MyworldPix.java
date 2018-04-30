@@ -52,33 +52,22 @@ public class MyworldPix extends CAImageBuffer {
 			    ImageFrame imageFrame =	ImageFrame.makeFrame( "MonkiIsland", image, delai, displayWidth, displayHeight );
 
 			    // initialise l'ecosysteme
-			    File Height = new File("island.png");
-				File Moist = new File("moisture.png");
-				File Temp = new File("temper.png");
-				
-				ImageBuffer MoistureMap;
-				ImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
-				ImageBuffer TempMap;
-				
-			    ImageBuffer MoistureMap = LoadFromDisk("moisture.png");
-			    try
-				{
-				
-
-					MoistureMap = LoadFromDisk("moisture.png");//new ImageBuffer(1024,1024); // method 1 : call constructor
-					HeightMap =null; //new ImageBuffer(1024,1024);	//initialisation des données pour la création de l'ile
-					TempMap =null;//new ImageBuffer(1024,1024);
-
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					System.exit(-1);
-				}
 			    
+				
+				ImageBuffer MoistureMap = ImageBuffer.LoadFromDisk("moisture.png");
+				ImageBuffer HeightMap = ImageBuffer.LoadFromDisk("island.png");	//infos nécessaires a la crea d'un monde interessant et coherent
+				ImageBuffer TempMap = ImageBuffer.LoadFromDisk("temper.png");
+				
+				
+				
+		
+		  
 
 			    
 				Island world = new Island(dx,dy);
+				world.InitIsland(HeightMap,MoistureMap,TempMap);
+				
+				
 
 				
 				for ( int i = 0 ; i != 10 ; i++ )
@@ -112,8 +101,8 @@ public class MyworldPix extends CAImageBuffer {
 				
 			}
 
-		}
+		
 
 	}
 
-}
+

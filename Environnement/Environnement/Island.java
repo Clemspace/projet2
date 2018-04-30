@@ -239,13 +239,15 @@ public class Island {
 		for ( int i = 0 ; i != agents.size() ; i++ )
 			image.setPixel(agents.get(i)._x, agents.get(i)._y, agents.get(i)._redValue, agents.get(i)._greenValue, agents.get(i)._blueValue);
 	}
-	public void initIsland(Island world, ImageBuffer hm, ImageBuffer mm,ImageBuffer tm) {
+	public void InitIsland(ImageBuffer hm, ImageBuffer mm,ImageBuffer tm) {
 		
 		for ( int x = 0 ; x != _dx ; x++ )
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
 			{
 				
-				
+				this.Buffer0[x][y].temp = (int)(tm.getRGB(x, y) & 0x0000FF)/255*100;
+				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y) & 0x0000FF)/255*100;
+	
 			}
 				
 		
