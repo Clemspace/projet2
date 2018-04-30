@@ -19,10 +19,6 @@ import toolbox.ImageBuffer;
 public class Island {
 	
 	
-	private ImageBuffer MoistureMap;
-	private ImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
-	private ImageBuffer TempMap;
-	
 
 	public int _dx;
 	public int _dy;
@@ -43,23 +39,7 @@ public class Island {
 	public Island(int _dx, int _dy){
 		
 		
-		try
-		{
-			File Height = new File("island.png");
-			File Moist = new File("moisture.png");
-			File Temp = new File("temper.png");
-
-			static ImageBuffer MoistureMap = LoadFromDisk("moisture.png");//new ImageBuffer(1024,1024); // method 1 : call constructor
-			HeightMap =null; //new ImageBuffer(1024,1024);	//initialisation des données pour la création de l'ile
-			TempMap =null;//new ImageBuffer(1024,1024);
-			//MoistureMap = loadFromDisk("moisture.png");
-
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.exit(-1);
-		}
+		
 		
 		this._dx = _dx;
 		this._dy = _dy;
@@ -259,7 +239,7 @@ public class Island {
 		for ( int i = 0 ; i != agents.size() ; i++ )
 			image.setPixel(agents.get(i)._x, agents.get(i)._y, agents.get(i)._redValue, agents.get(i)._greenValue, agents.get(i)._blueValue);
 	}
-	public void initIsland(Island world, File hm, File mm,File tm) {
+	public void initIsland(Island world, ImageBuffer hm, ImageBuffer mm,ImageBuffer tm) {
 		
 		for ( int x = 0 ; x != _dx ; x++ )
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction

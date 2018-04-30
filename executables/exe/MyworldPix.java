@@ -9,8 +9,9 @@ import Environnement.Island;
 import toolbox.CAtoolbox;
 import toolbox.ImageBuffer;
 import toolbox.ImageFrame;
+import toolbox.CAImageBuffer;
 
-public class MyworldPix extends CAtoolbox {
+public class MyworldPix extends CAImageBuffer {
 
 	public static void main(String[] args) {
 		
@@ -20,8 +21,8 @@ public class MyworldPix extends CAtoolbox {
 				int dx = 1024;
 				int dy = 1024;
 				
-				int displayWidth = dx*8;  // 200
-				int displayHeight = dy*8; // 200
+				int displayWidth = dx;  // 200
+				int displayHeight = dy; // 200
 
 				// pick dimension for display
 				if ( displayWidth < 200 )
@@ -54,7 +55,26 @@ public class MyworldPix extends CAtoolbox {
 			    File Height = new File("island.png");
 				File Moist = new File("moisture.png");
 				File Temp = new File("temper.png");
-			    ImageBuffer moist = LoadFromDisk("moisture.png");
+				
+				ImageBuffer MoistureMap;
+				ImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
+				ImageBuffer TempMap;
+				
+			    ImageBuffer MoistureMap = LoadFromDisk("moisture.png");
+			    try
+				{
+				
+
+					MoistureMap = LoadFromDisk("moisture.png");//new ImageBuffer(1024,1024); // method 1 : call constructor
+					HeightMap =null; //new ImageBuffer(1024,1024);	//initialisation des données pour la création de l'ile
+					TempMap =null;//new ImageBuffer(1024,1024);
+
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.exit(-1);
+				}
 			    
 
 			    

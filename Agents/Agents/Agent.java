@@ -1,6 +1,7 @@
 package Agents;
 
 import Environnement.Island;
+
 public abstract class Agent {
 
 	Island _world;
