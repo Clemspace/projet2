@@ -1,3 +1,10 @@
+package exe;
+import Agents.PredatorAgent;
+import Agents.PreyAgent;
+import Environnement.World;
+import toolbox.CAImageBuffer;
+import toolbox.CAtoolbox;
+import toolbox.ImageFrame;
 
 public class MyEcosystem_predprey extends CAtoolbox {
 
@@ -48,7 +55,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		for ( int i = 0 ; i != 10 ; i++ )
 			world.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 		
-	    // mise a jour de l'Žtat du monde
+	    // mise a jour de l'ï¿½tat du monde
 		
 		while ( it != nombreDePasMaximum )
 		{

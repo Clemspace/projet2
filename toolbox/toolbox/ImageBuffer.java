@@ -1,3 +1,4 @@
+package toolbox;
 
 
 
@@ -21,7 +22,7 @@ public class ImageBuffer extends BufferedImage {
 		super(width, height, BufferedImage.TYPE_INT_ARGB);
 	}
 
-    static public ImageBuffer loadFromDisk( String __filename)
+    static public ImageBuffer LoadFromDisk( String __filename)
     {
     	ImageBuffer image = null; 
     	try {

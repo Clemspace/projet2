@@ -1,18 +1,27 @@
-import java.awt.Graphics;
+package Environnement;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import Agents.Agent;
+import Agents.PredatorAgent;
+import Agents.PreyAgent;
+
+import toolbox.CAImageBuffer;
+import toolbox.ImageBuffer;
 
 public class Island {
 	
 	
-	private CAImageBuffer MoistureMap;
-	private CAImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
-	private CAImageBuffer TempMap;
+	private ImageBuffer MoistureMap;
+	private ImageBuffer HeightMap;	//infos nécessaires a la crea d'un monde interessant et coherent
+	private ImageBuffer TempMap;
 	
 
 	public int _dx;
@@ -21,13 +30,13 @@ public class Island {
 	public Case[][] Buffer1;
 
 	boolean buffering;
-	boolean cloneBuffer; // if buffering, clone buffer after swith
+	boolean cloneBuffer; // if buffering, clone buffer after switch
 	
 	int activeIndex;
 	
-	ArrayList<Agent> agents;
-	ArrayList<PredatorAgent> Predateurs;
-	ArrayList<PreyAgent> Proies;
+	public ArrayList<Agent> agents;
+	public ArrayList<PredatorAgent> Predateurs;
+	public ArrayList<PreyAgent> Proies;
 
 
 	
@@ -40,7 +49,7 @@ public class Island {
 			File Moist = new File("moisture.png");
 			File Temp = new File("temper.png");
 
-			MoistureMap = new CAImageBuffer();//new ImageBuffer(1024,1024); // method 1 : call constructor
+			static ImageBuffer MoistureMap = LoadFromDisk("moisture.png");//new ImageBuffer(1024,1024); // method 1 : call constructor
 			HeightMap =null; //new ImageBuffer(1024,1024);	//initialisation des données pour la création de l'ile
 			TempMap =null;//new ImageBuffer(1024,1024);
 			//MoistureMap = loadFromDisk("moisture.png");
@@ -250,12 +259,12 @@ public class Island {
 		for ( int i = 0 ; i != agents.size() ; i++ )
 			image.setPixel(agents.get(i)._x, agents.get(i)._y, agents.get(i)._redValue, agents.get(i)._greenValue, agents.get(i)._blueValue);
 	}
-	public void initImage(CAImageBuffer image, File hm, File mm,File tm) {
+	public void initIsland(Island world, File hm, File mm,File tm) {
 		
 		for ( int x = 0 ; x != _dx ; x++ )
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
 			{
-				hm.
+				
 				
 			}
 				

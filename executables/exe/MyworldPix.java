@@ -1,3 +1,14 @@
+package exe;
+
+
+import java.io.File;
+
+import Agents.PredatorAgent;
+import Agents.PreyAgent;
+import Environnement.Island;
+import toolbox.CAtoolbox;
+import toolbox.ImageBuffer;
+import toolbox.ImageFrame;
 
 public class MyworldPix extends CAtoolbox {
 
@@ -40,11 +51,14 @@ public class MyworldPix extends CAtoolbox {
 			    ImageFrame imageFrame =	ImageFrame.makeFrame( "MonkiIsland", image, delai, displayWidth, displayHeight );
 
 			    // initialise l'ecosysteme
+			    File Height = new File("island.png");
+				File Moist = new File("moisture.png");
+				File Temp = new File("temper.png");
+			    ImageBuffer moist = LoadFromDisk("moisture.png");
 			    
 
 			    
 				Island world = new Island(dx,dy);
-				MoistureMap = loadFromDisk("Moisture.png");
 
 				
 				for ( int i = 0 ; i != 10 ; i++ )

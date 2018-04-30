@@ -1,7 +1,9 @@
+package Agents;
+import Environnement.Island;
 
-public class EaterWalker extends Agent {
+public class LangtonAnt extends Agent {
 
-	public EaterWalker( int __x, int __y, World __w )
+ 	public LangtonAnt( int __x, int __y, Island __w )
 	{
 		super(__x,__y,__w);
 	}
@@ -12,19 +14,16 @@ public class EaterWalker extends Agent {
 		
 		int cellColor[] = _world.getCellState(_x, _y);
 		
-		cellColor[redId]   = 255;
-		cellColor[greenId] = 255;
-		cellColor[blueId]  = 255;
+		// !!!!!!!!!! A COMPLETER !!!!!!!!!!
+		
+		cellColor[redId] = (int)(Math.random()*256.0);
+			cellColor[greenId] = (int)(Math.random()*255.0);
+			cellColor[blueId]  = (int)(Math.random()*255.0);
+			_orient = (int)(Math.random()*4.0);
 
 		_world.setCellState(_x, _y, cellColor);
-
-		if ( Math.random() > 0.5 ) // au hasard
-			_orient = (_orient+1) %4;
-		else
-			_orient = (_orient-1+4) %4;
-
 		
-		// met a jour: la position de l'agent (dŽpend de l'orientation)
+		// met a jour: la position de l'agent (dï¿½pend de l'orientation)
 		 switch ( _orient ) 
 		 {
          	case 0: // nord	
@@ -42,4 +41,11 @@ public class EaterWalker extends Agent {
 		 }
 	}
 	
+	
 }
+
+
+
+
+
+

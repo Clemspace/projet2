@@ -1,14 +1,20 @@
+package exe;
+
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.ImageObserver;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class IslandDemo extends JPanel {
-	
+public class SpriteDemo extends JPanel {
+
+
 	private JFrame frame;
 	
 	private Image waterSprite;
@@ -19,9 +25,9 @@ public class IslandDemo extends JPanel {
 	
 	private int spriteLength = 32;
 	
-	private Island myWorld;
+	private int[][] myWorld;
 
-	public IslandDemo(Island myWorld)
+	public SpriteDemo()
 	{
 		try
 		{
@@ -38,25 +44,25 @@ public class IslandDemo extends JPanel {
 			System.exit(-1);
 		}
 
-		frame = new JFrame("MonkiIsland");
+		frame = new JFrame("World of Sprite");
 		frame.add(this);
 		frame.setSize(1024,1024);
 		frame.setVisible(true);
 		
-		myWorld =  
+		myWorld = new int[32][32];
 		
 		for ( int i = 0 ; i != 32 ; i++ )
 			for ( int j = 0 ; j != 32 ; j++ )
-				myWorld.tilemap[i][j] = new Case();
+				myWorld[i][j] = (int)(Math.random()*6.0);
 	}
 
 	public void paint(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D)g;
-		for ( int i = 0 ; i < myWorld._dx ; i++ )
-			for ( int j = 0 ; j < myWorld._dy ; j++ )
+		for ( int i = 0 ; i < myWorld.length ; i++ )
+			for ( int j = 0 ; j < myWorld[0].length ; j++ )
 			{
-				if ( myWorld[i][j]. == 0 )
+				if ( myWorld[i][j] == 0 )
 					g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				else
 					if ( myWorld[i][j] == 1 )
@@ -80,6 +86,4 @@ public class IslandDemo extends JPanel {
 	public static void main(String[] args) {
 		new SpriteDemo();
 	}
-}
-
 }

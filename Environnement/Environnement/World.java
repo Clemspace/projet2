@@ -1,4 +1,8 @@
+package Environnement;
 import java.util.ArrayList;
+
+import Agents.Agent;
+import toolbox.CAImageBuffer;
 
 
 public class World {

@@ -1,3 +1,9 @@
+package exe;
+import Agents.RandomWalker;
+import Environnement.World;
+import toolbox.CAImageBuffer;
+import toolbox.CAtoolbox;
+import toolbox.ImageFrame;
 
 public class MyEcosystem_ants extends CAtoolbox {
 

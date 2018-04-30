@@ -1,3 +1,6 @@
+package Agents;
+import Environnement.Island;
+
 //import sun.management.Agent;
 
 public class PredatorAgent extends Agent {

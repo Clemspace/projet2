@@ -1,7 +1,9 @@
+package Agents;
+import Environnement.Island;
 
-public class RandomWalker extends Agent {
+public class EaterWalker extends Agent {
 
-	public RandomWalker( int __x, int __y, World __w )
+	public EaterWalker( int __x, int __y, Island __w )
 	{
 		super(__x,__y,__w);
 	}
@@ -12,11 +14,9 @@ public class RandomWalker extends Agent {
 		
 		int cellColor[] = _world.getCellState(_x, _y);
 		
-		
-		cellColor[redId]   = 0;
-		cellColor[greenId] = 0;
-		cellColor[blueId]  = 0;			
-		
+		cellColor[redId]   = 255;
+		cellColor[greenId] = 255;
+		cellColor[blueId]  = 255;
 
 		_world.setCellState(_x, _y, cellColor);
 

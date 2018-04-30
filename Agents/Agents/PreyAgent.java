@@ -1,3 +1,5 @@
+package Agents;
+import Environnement.Island;
 
 public class PreyAgent extends Agent {
 

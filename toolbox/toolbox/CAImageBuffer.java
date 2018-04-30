@@ -1,5 +1,8 @@
+package toolbox;
 
-import java.awt.Color;cells[x][y]
+import java.awt.Color;
+
+import Environnement.Case;
 
 public class CAImageBuffer extends ImageBuffer {
 
