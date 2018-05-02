@@ -18,8 +18,8 @@ public class MyworldPix {
 		
 		// initialisation generale
 	    		double densite = 0.3;
-				int dx = 512;
-				int dy = 512;
+				int dx = 1024;
+				int dy = 1024;
 				
 				int displayWidth = dx;  // 200
 				int displayHeight = dy; // 200
@@ -55,7 +55,7 @@ public class MyworldPix {
 			    
 				
 				ImageBuffer MoistureMap = ImageBuffer.LoadFromDisk("moisture.png");
-				ImageBuffer HeightMap = ImageBuffer.LoadFromDisk("island.png");	//infos nécessaires a la crea d'un monde interessant et coherent
+				ImageBuffer HeightMap = ImageBuffer.LoadFromDisk("austra10.png");	//infos nécessaires a la crea d'un monde interessant et coherent
 				ImageBuffer TempMap = ImageBuffer.LoadFromDisk("temper.png");
 				
 				

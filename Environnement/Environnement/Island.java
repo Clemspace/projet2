@@ -293,10 +293,12 @@ public class Island {
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
 			{
 				
-				this.Buffer0[x][y].temp = (int)(tm.getRGB(x, y) & 0x0000FF)/255*100;
-				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y) & 0x0000FF)/255*100;
-				this.Buffer0[x][y].moisture = (int)(mm.getRGB(x, y) & 0x0000FF)/255*100;
+				this.Buffer0[x][y].temp = (int)(tm.getRGB(x, y) & 0xFF0000)/255;
+				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y) & 0xFF0000)/255;
+				this.Buffer0[x][y].moisture = (int)(mm.getRGB(x, y) & 0xFF0000)/255;
 				this.Buffer0[x][y].fertilite=Buffer0[x][y].moisture;
+				this.Buffer0[x][y].x = x;
+				this.Buffer0[x][y].y = y;
 				
 				if (Buffer0[x][y].hauteur<10) {
 					Buffer0[x][y].type = -1;
@@ -308,7 +310,12 @@ public class Island {
 				}
 				else Buffer0[x][y].type = 1;
 				
+				System.out.println("type"+this.Buffer0[x][y].type);
+				System.out.println("moisture"+this.Buffer0[x][y].moisture);
+				System.out.println("temp"+this.Buffer0[x][y].temp);
+				System.out.println("haut"+this.Buffer0[x][y].hauteur);
 			}
+			
 		}
 		InitForet(densite);
 		
