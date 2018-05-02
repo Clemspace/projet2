@@ -281,7 +281,8 @@ public class Island {
 		
 		for (int x = 0 ; x != _dx ; x++ ) {
 	    	for (int y = 0 ; y != _dy ; y++ ) {
-	    		if ( Buffer0[x][y].moisture*densiteIni >= Math.random()*100 && Buffer0[x][y].type >0) { 
+	    	boolean arbre =  Buffer0[x][y].moisture*densiteIni+Buffer0[x][y].temp*densiteIni >= Math.random()*150;
+	    		if (arbre && Buffer0[x][y].type >0) { 
 	    			Buffer0[x][y].arbre=1; // tree
 	    			Buffer0[x][y].type = 2;
 	    			
@@ -319,17 +320,16 @@ public class Island {
 							
 						}
 					}
-					this.Buffer1[x][y].type =5 ;
-				}
+					ResetBiome(this.Buffer1[x][y]);				}
 				
-				else if((this.Buffer0[x][y].type == 0 ||this.Buffer0[x][y].type == 3) && repousse >= Math.random()) {
-					this.Buffer1[x][y].type = 1;
-				}
-				else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()*Buffer0[x][y].temp) {
-					this.Buffer1[x][y].type = 2;										
-				}
-				else if(this.Buffer0[x][y].type == 1 && this.Buffer1[x][y].type== 2){//arbre devenu en feu a cette itération
+				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3) && repousse >= Math.random()) {
 					this.Buffer1[x][y].type = 2;
+				}
+				else if(this.Buffer0[x][y].type == 2 && incendie >= Math.random()*Buffer0[x][y].temp) {
+					this.Buffer1[x][y].type = 3;										
+				}
+				else if(this.Buffer0[x][y].type == 2 && this.Buffer1[x][y].type== 3){//arbre devenu en feu a cette itération
+					this.Buffer1[x][y].type = 3;
 				
 				}
 				
@@ -414,19 +414,7 @@ public class Island {
 				this.Buffer0[x][y].x = x;
 				this.Buffer0[x][y].y = y;
 				
-				if (Buffer0[x][y].hauteur<10) {
-					Buffer0[x][y].type = -1;
-					Buffer0[x][y].volWater = 100;
-				}
-				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) {
-					Buffer0[x][y].type = 4;
-				}
-				else if (Buffer0[x][y].temp<50) {
-					Buffer0[x][y].type = 5;
-				
-					
-				}
-				else Buffer0[x][y].type = 1;
+				ResetBiome(this.Buffer0[x][y]);
 				
 			}
 			
@@ -438,6 +426,21 @@ public class Island {
 	
 				
 		
+	}
+	public void ResetBiome(Case cell) {
+		if (cell.hauteur<10) {
+			cell.type = -1;
+			cell.volWater = 100 - (int)Math.random()*50;
+		}
+		else if (cell.hauteur>80 && cell.temp<50) {
+			cell.type = 4;
+		}
+		else if (cell.temp<50) {
+			cell.type = 5;
+		
+			
+		}
+		else cell.type = 1;
 	}
 	
 }
