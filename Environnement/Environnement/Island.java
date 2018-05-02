@@ -51,9 +51,9 @@ public class Island {
 		this._dx = _dx;
 		this._dy = _dy;
 		
-		densiteIni = 0.9;
+		densiteIni = 0.3;
 		repousse = 0.001;
-		incendie = 0.001;
+		incendie = 0.00001;
 		
 		agents = new ArrayList<Agent>();
 		
@@ -281,7 +281,7 @@ public class Island {
 		
 		for (int x = 0 ; x != _dx ; x++ ) {
 	    	for (int y = 0 ; y != _dy ; y++ ) {
-	    	boolean arbre =  Buffer0[x][y].moisture*densiteIni+Buffer0[x][y].temp*densiteIni >= Math.random()*150;
+	    	boolean arbre =  Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35; //on utlise cette méthode pour avoir moins d'arbres dans des cas de hauteur ou chaleur extreme
 	    		if (arbre && Buffer0[x][y].type >0) { 
 	    			Buffer0[x][y].arbre=1; // tree
 	    			Buffer0[x][y].type = 2;
@@ -322,7 +322,7 @@ public class Island {
 					}
 					ResetBiome(this.Buffer1[x][y]);				}
 				
-				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3) && repousse >= Math.random()) {
+				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3) && repousse >= Math.random()&&(Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35)) {
 					this.Buffer1[x][y].type = 2;
 				}
 				else if(this.Buffer0[x][y].type == 2 && incendie >= Math.random()*Buffer0[x][y].temp) {
@@ -423,24 +423,25 @@ public class Island {
 		
 		
 		
-	
-				
+			
 		
 	}
 	public void ResetBiome(Case cell) {
+		
+		
 		if (cell.hauteur<10) {
 			cell.type = -1;
 			cell.volWater = 100 - (int)Math.random()*50;
 		}
-		else if (cell.hauteur>80 && cell.temp<50) {
+		else if (cell.hauteur>70 && cell.temp<70) {
 			cell.type = 4;
 		}
-		else if (cell.temp<50) {
-			cell.type = 5;
+		else if (cell.temp>80) {
+			cell.type = 1;
 		
 			
 		}
-		else cell.type = 1;
+		else cell.type = 5 ;
 	}
 	
 }

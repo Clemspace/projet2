@@ -87,7 +87,7 @@ public class CAImageBuffer extends ImageBuffer {
 					this.setPixel(x,y,220,220,243);
 					break;
 				case 5: //CAS PLAINE
-					this.setPixel(x,y,200,254,255-cells[x][y].moisture);
+					this.setPixel(x,y,250-2*cells[x][y].hauteur,254,255-2*cells[x][y].moisture);
 					break;
 				
 				//this.setPixel(x, y, cells[x][y].color[0], cells[x][y].color[1], cells[x][y].color[2] );

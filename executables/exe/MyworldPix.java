@@ -29,16 +29,16 @@ public class MyworldPix {
 				if ( displayWidth < 200 )
 					displayWidth = 200;
 				else
-					if ( displayWidth > 600 )
-						displayWidth = 600;
+					if ( displayWidth > 1024 )
+						displayWidth = 1024;
 					else
 						if ( displayWidth < 300 )
 							displayWidth = displayWidth * 2; 
 				if ( displayHeight < 200 )
 					displayHeight = 200;
 				else
-					if ( displayHeight > 600 )
-						displayHeight = 600;
+					if ( displayHeight > 1024 )
+						displayHeight =1024;
 					else
 						if ( displayHeight < 300 )
 							displayHeight = displayHeight * 2; 
