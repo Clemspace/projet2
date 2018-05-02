@@ -24,6 +24,10 @@ public class Island {
 	public int _dx;
 	public int _dy;
 	
+	double densiteIni;
+	double incendie;
+	double repousse;
+	
 	public Case[][] Buffer0;
 	public Case[][] Buffer1;
 
@@ -46,6 +50,11 @@ public class Island {
 		
 		this._dx = _dx;
 		this._dy = _dy;
+		
+		densiteIni = 0.3;
+		repousse = 0.001;
+		incendie = 0.0001;
+		
 		agents = new ArrayList<Agent>();
 		
 
@@ -280,6 +289,109 @@ public class Island {
 		
 	}
 	
+	void ForestUpdate() {
+		for ( int x = 0 ; x != this.Buffer0.length ; x++ ) {
+			for ( int y = 0 ; y != this.Buffer0[0].length ; y++ )
+			{
+				if(this.Buffer0[x][y].type == 3) { //cas case en feu
+					Case[] voisins = {this.Buffer0[(x+_dx)%_dx][(y+_dy-1)%_dy],this.Buffer0[(x+_dx)%_dx][(y+_dy+1)%_dy],
+								  	  this.Buffer0[(x+_dx-1)%_dx][(y+_dy)%_dy],this.Buffer0[(x+_dx+1)%_dx][(y+_dy)%_dy]};//von Newmann HBGD
+					
+					for (int j=0; j != voisins.length; j++) {
+						if(voisins[j].type == 2) {
+							switch(j) {
+							case 0:
+								this.Buffer1[(x+_dx)%_dx][(y+_dy-1)%_dy].type = 3;
+								break;
+							case 1:
+								this.Buffer1[(x+_dx)%_dx][(y+_dy+1)%_dy].type = 3;
+								break;
+							case 2:
+								this.Buffer1[(x+_dx-1)%_dx][(y+_dy)%_dy].type = 3;
+								break;
+							case 3:
+								this.Buffer1[(x+_dx+1)%_dx][(y+_dy)%_dy].type = 3;
+								break;
+																							
+							}
+							
+						}
+					}
+					this.Buffer1[x][y].type =5 ;
+				}
+				
+				else if((this.Buffer0[x][y].type == 0 ||this.Buffer0[x][y].type == 3) && repousse >= Math.random()) {
+					this.Buffer1[x][y].type = 1;
+				}
+				else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()) {
+					this.Buffer1[x][y].type = 2;										
+				}
+				else if(this.Buffer0[x][y].type == 1 && this.Buffer1[x][y].type== 2){//arbre devenu en feu a cette itération
+					this.Buffer1[x][y].type = 2;
+				
+				}
+				
+				
+				else this.Buffer1[x][y] = this.Buffer0[x][y];
+				
+			}	
+			}
+		
+		for ( int x1 = 0 ; x1 != Buffer0.length ; x1++ ) {
+			for ( int y2 = 0 ; y2 != Buffer0[0].length ; y2++ ) {
+				if(Buffer0[x1][y2].type==1){
+					
+				}
+				Buffer0[x1][y2] = Buffer1[x1][y2];
+				
+			}
+		}
+	}
+	void ForestUpdateAlea(int x, int y) {
+		
+		if(this.Buffer0[x][y].type == 3) { //cas case en feu
+		Case [] voisins = {this.Buffer0[(x+_dx)%_dx][(y+_dy-1)%_dy],this.Buffer0[(x+_dx)%_dx][(y+_dy+1)%_dy],
+						  	  this.Buffer0[(x+_dx-1)%_dx][(y+_dy)%_dy],this.Buffer0[(x+_dx+1)%_dx][(y+_dy)%_dy]};//von Newmann HBGD
+			
+			for (int j=0; j != voisins.length; j++) {
+				if(voisins[j].type == 1) {
+					switch(j) {
+					case 0:
+						this.Buffer1[(x+_dx)%_dx][(y+_dy-1)%_dy].type = 2;
+						break;
+					case 1:
+						this.Buffer1[(x+_dx)%_dx][(y+_dy+1)%_dy].type = 2;
+						break;
+					case 2:
+						this.Buffer1[(x+_dx-1)%_dx][(y+_dy)%_dy].type = 2;
+						break;
+					case 3:
+						this.Buffer1[(x+_dx+1)%_dx][(y+_dy)%_dy].type = 2;
+						break;
+																					
+					}
+					
+				}
+			}
+			this.Buffer1[x][y].type = 3;
+		}
+		
+		else if((this.Buffer0[x][y].type == 0 ||this.Buffer0[x][y].type == 3) && repousse >= Math.random()) {
+			this.Buffer1[x][y].type = 1;
+		}
+		else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()) {
+			this.Buffer1[x][y].type = 2;										
+		}
+		else if(this.Buffer0[x][y].type == 1 && this.Buffer1[x][y].type== 2){//arbre devenu en feu a cette itération
+			this.Buffer1[x][y].type = 2;
+			
+		}
+		
+		
+		else this.Buffer1[x][y] = this.Buffer0[x][y];
+		
+	}	
+	
 	public void display( CAImageBuffer image )
 	{
 		image.update(this.getCurrentBuffer());
@@ -304,7 +416,7 @@ public class Island {
 					Buffer0[x][y].type = -1;
 					Buffer0[x][y].volWater = 100;
 				}
-				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) { //
+				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) {
 					Buffer0[x][y].type = 4;
 				}
 				else if (Buffer0[x][y].temp<50) {
@@ -314,10 +426,6 @@ public class Island {
 				}
 				else Buffer0[x][y].type = 1;
 				
-				System.out.println("type"+this.Buffer0[x][y].type);
-				System.out.println("moisture"+this.Buffer0[x][y].moisture);
-				System.out.println("temp"+this.Buffer0[x][y].temp);
-				System.out.println("haut"+this.Buffer0[x][y].hauteur);
 			}
 			
 		}
