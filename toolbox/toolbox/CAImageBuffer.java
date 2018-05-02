@@ -67,26 +67,27 @@ public class CAImageBuffer extends ImageBuffer {
 			for ( int x = 0 ; x != cells.length ; x++ )
 			{	
 				switch(cells[x][y].type) {
-				
+				//cells[x][y].volWater
 				case -1://CAS OCEAN
-				
+					this.setPixel(x,y,0,60+cells[x][y].volWater,255);
+					break;
 				case 0: //CAS EAU
-					this.setPixel(x,y,0,200-cells[x][y].volWater,255);
+					this.setPixel(x,y,0,60+cells[x][y].volWater,255);
 					break;
 				case 1: //CAS SABLE
-					this.setPixel(x,y,255,255-cells[x][y].moisture,0);
+					this.setPixel(x,y,255,(int)(255-cells[x][y].moisture),0);
 					break;
 				case 2: //CAS FORET
 					this.setPixel(x,y,0,200-cells[x][y].arbre,0);
 					break;
 				case 3: //CAS FEU	
-					this.setPixel(x,y,255,50,0);
+					this.setPixel(x,y,254,50,0);
 					break;
 				case 4: //CAS NEIGE
 					this.setPixel(x,y,220,220,243);
 					break;
 				case 5: //CAS PLAINE
-					this.setPixel(x,y,200,255,200);
+					this.setPixel(x,y,200,254,255-cells[x][y].moisture);
 					break;
 				
 				//this.setPixel(x, y, cells[x][y].color[0], cells[x][y].color[1], cells[x][y].color[2] );

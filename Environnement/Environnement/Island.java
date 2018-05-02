@@ -271,7 +271,7 @@ public class Island {
 		
 		for (int x = 0 ; x != _dx ; x++ ) {
 	    	for (int y = 0 ; y != _dy ; y++ ) {
-	    		if ( Buffer0[x][y].fertilite*2*densite >= Math.random() && Buffer0[x][y].type <0) {
+	    		if ( Buffer0[x][y].moisture* densite >= Math.random()*100 && Buffer0[x][y].type >0) { 
 	    			Buffer0[x][y].arbre=1; // tree
 	    			Buffer0[x][y].type = 2;
 	    		}
@@ -293,9 +293,9 @@ public class Island {
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
 			{
 				
-				this.Buffer0[x][y].temp = (int)(tm.getRGB(x, y) & 0xFF0000)/255;
-				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y) & 0xFF0000)/255;
-				this.Buffer0[x][y].moisture = (int)(mm.getRGB(x, y) & 0xFF0000)/255;
+				this.Buffer0[x][y].temp = (int)((tm.getRGB(x, y) &0xff)/2.55);
+				this.Buffer0[x][y].hauteur = (int)(hm.getRGB(x, y)&0xff);
+				this.Buffer0[x][y].moisture =(int) (mm.getRGB(x, y)&0xff);
 				this.Buffer0[x][y].fertilite=Buffer0[x][y].moisture;
 				this.Buffer0[x][y].x = x;
 				this.Buffer0[x][y].y = y;
@@ -304,9 +304,13 @@ public class Island {
 					Buffer0[x][y].type = -1;
 					Buffer0[x][y].volWater = 100;
 				}
-				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) {
+				else if (Buffer0[x][y].hauteur>80 && Buffer0[x][y].temp<50) { //
 					Buffer0[x][y].type = 4;
-
+				}
+				else if (Buffer0[x][y].temp<50) {
+					Buffer0[x][y].type = 5;
+				
+					
 				}
 				else Buffer0[x][y].type = 1;
 				

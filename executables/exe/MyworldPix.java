@@ -55,7 +55,7 @@ public class MyworldPix {
 			    
 				
 				ImageBuffer MoistureMap = ImageBuffer.LoadFromDisk("moisture.png");
-				ImageBuffer HeightMap = ImageBuffer.LoadFromDisk("austra10.png");	//infos nécessaires a la crea d'un monde interessant et coherent
+				ImageBuffer HeightMap = ImageBuffer.LoadFromDisk("hm2.png");	//infos nécessaires a la crea d'un monde interessant et coherent
 				ImageBuffer TempMap = ImageBuffer.LoadFromDisk("temper.png");
 				
 				
