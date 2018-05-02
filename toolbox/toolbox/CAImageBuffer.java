@@ -75,7 +75,7 @@ public class CAImageBuffer extends ImageBuffer {
 					this.setPixel(x,y,0,60+cells[x][y].volWater,255);
 					break;
 				case 1: //CAS SABLE
-					this.setPixel(x,y,255,(int)(255-cells[x][y].moisture),0);
+					this.setPixel(x,y,150+cells[x][y].hauteur,(int)(255-cells[x][y].moisture),0);
 					break;
 				case 2: //CAS FORET
 					this.setPixel(x,y,0,200-cells[x][y].arbre,0);
@@ -84,7 +84,7 @@ public class CAImageBuffer extends ImageBuffer {
 					this.setPixel(x,y,254,50,0);
 					break;
 				case 4: //CAS NEIGE
-					this.setPixel(x,y,220,220,243);
+					this.setPixel(x,y,150+cells[x][y].hauteur,150+cells[x][y].hauteur,150+cells[x][y].hauteur);
 					break;
 				case 5: //CAS PLAINE
 					this.setPixel(x,y,250-2*cells[x][y].hauteur,254,255-2*cells[x][y].moisture);

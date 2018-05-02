@@ -183,7 +183,7 @@ public class Island {
 	public void step ( )
 	{
 		stepWorld();
-		stepAgents();
+		//stepAgents();
 		
 		if ( buffering && cloneBuffer )
 		{
@@ -234,8 +234,10 @@ public class Island {
 	
 	public void stepWorld() // world THEN agents
 	{
-		this.ForestUpdate();
-		//this.ecoulement();
+		
+		
+		//this.ForestUpdate(); forÍt dÈterministe
+		//this.ecoulement(); Ècoulement marche de maniËre non optimale
 	}
 	
 	public void stepAgents() // world THEN agents
@@ -347,50 +349,58 @@ public class Island {
 			}
 		}
 	}
-	void ForestUpdateAlea(int x, int y) {
+	void ForestUpdatexy(int x, int y) {
 		
 		if(this.Buffer0[x][y].type == 3) { //cas case en feu
-		Case [] voisins = {this.Buffer0[(x+_dx)%_dx][(y+_dy-1)%_dy],this.Buffer0[(x+_dx)%_dx][(y+_dy+1)%_dy],
+			Case[] voisins = {this.Buffer0[(x+_dx)%_dx][(y+_dy-1)%_dy],this.Buffer0[(x+_dx)%_dx][(y+_dy+1)%_dy],
 						  	  this.Buffer0[(x+_dx-1)%_dx][(y+_dy)%_dy],this.Buffer0[(x+_dx+1)%_dx][(y+_dy)%_dy]};//von Newmann HBGD
 			
 			for (int j=0; j != voisins.length; j++) {
-				if(voisins[j].type == 1) {
+				if(voisins[j].type == 2) {
 					switch(j) {
 					case 0:
-						this.Buffer1[(x+_dx)%_dx][(y+_dy-1)%_dy].type = 2;
+						this.Buffer1[(x+_dx)%_dx][(y+_dy-1)%_dy].type = 3;
 						break;
 					case 1:
-						this.Buffer1[(x+_dx)%_dx][(y+_dy+1)%_dy].type = 2;
+						this.Buffer1[(x+_dx)%_dx][(y+_dy+1)%_dy].type = 3;
 						break;
 					case 2:
-						this.Buffer1[(x+_dx-1)%_dx][(y+_dy)%_dy].type = 2;
+						this.Buffer1[(x+_dx-1)%_dx][(y+_dy)%_dy].type = 3;
 						break;
 					case 3:
-						this.Buffer1[(x+_dx+1)%_dx][(y+_dy)%_dy].type = 2;
+						this.Buffer1[(x+_dx+1)%_dx][(y+_dy)%_dy].type = 3;
 						break;
 																					
 					}
 					
 				}
 			}
-			this.Buffer1[x][y].type = 3;
-		}
+			ResetBiome(this.Buffer1[x][y]);				}
 		
-		else if((this.Buffer0[x][y].type == 0 ||this.Buffer0[x][y].type == 3) && repousse >= Math.random()) {
-			this.Buffer1[x][y].type = 1;
-		}
-		else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()) {
-			this.Buffer1[x][y].type = 2;										
-		}
-		else if(this.Buffer0[x][y].type == 1 && this.Buffer1[x][y].type== 2){//arbre devenu en feu a cette it√©ration
+		else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3) && repousse >= Math.random()&&(Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35)) {
 			this.Buffer1[x][y].type = 2;
-			
+		}
+		else if(this.Buffer0[x][y].type == 2 && incendie >= Math.random()*Buffer0[x][y].temp) {
+			this.Buffer1[x][y].type = 3;										
+		}
+		else if(this.Buffer0[x][y].type == 2 && this.Buffer1[x][y].type== 3){//arbre devenu en feu a cette it√©ration
+			this.Buffer1[x][y].type = 3;
+		
 		}
 		
 		
 		else this.Buffer1[x][y] = this.Buffer0[x][y];
 		
 	}	
+	
+		
+		
+	
+	void ForestAlea() {
+		for ( int x = 0 ; x != _dx*_dy ; x++ ) {
+			ForestUpdatexy((int)Math.random()*_dx,(int)Math.random()*_dy);
+		}
+	}
 	
 	public void display( CAImageBuffer image )
 	{

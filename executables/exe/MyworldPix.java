@@ -20,8 +20,8 @@ public class MyworldPix {
 		
 		// initialisation generale
 	    		double densite = 0.2;
-				int dx =256;
-				int dy =256;
+				int dx =1024;
+				int dy =1024;
 				
 				int displayWidth = dx;  // 200
 				int displayHeight = dy; // 200
