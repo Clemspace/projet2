@@ -5,6 +5,7 @@ import java.io.File;
 
 import Agents.PredatorAgent;
 import Agents.PreyAgent;
+import Environnement.Case;
 import Environnement.Island;
 import toolbox.CAtoolbox;
 import toolbox.ImageBuffer;
@@ -17,9 +18,9 @@ public class MyworldPix {
 		
 		
 		// initialisation generale
-	    		double densite = 0.3;
-				int dx = 1024;
-				int dy = 1024;
+	    		double densite = 0.2;
+				int dx =1024;
+				int dy =1024;
 				
 				int displayWidth = dx;  // 200
 				int displayHeight = dy; // 200
@@ -46,7 +47,7 @@ public class MyworldPix {
 				int delai = 200;//100; // -- delay before refreshing display -- program is hold during delay, even if no screen update was requested. USE WITH CARE. 
 				int nombreDePasMaximum = Integer.MAX_VALUE;
 				int it = 0;
-				int displaySpeed = 1;//50; // from 1 to ...
+				int displaySpeed = 5;//50; // from 1 to ...
 				
 				CAImageBuffer image = new CAImageBuffer(dx,dy);
 			    ImageFrame imageFrame =	ImageFrame.makeFrame( "MonkiIsland", image, delai, displayWidth, displayHeight );
@@ -65,7 +66,7 @@ public class MyworldPix {
 
 			    
 				Island world = new Island(dx,dy);
-				world.InitIsland(HeightMap,MoistureMap,TempMap, densite);
+				world.InitIsland(HeightMap,MoistureMap,TempMap);
 				world.display(image); 
 
 				
@@ -86,14 +87,17 @@ public class MyworldPix {
 					
 					if ( it % displaySpeed == 0 )
 						world.display(image); 
+					image.update(world.Buffer0);
+					
 
 					// 2 - update
 								
 					world.step();
-								
+					
 					// 3 - iterate
 					
 					it++;
+					System.out.println(it);
 					
 					try {
 						Thread.sleep(delai);

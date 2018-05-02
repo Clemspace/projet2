@@ -51,9 +51,9 @@ public class Island {
 		this._dx = _dx;
 		this._dy = _dy;
 		
-		densiteIni = 0.3;
+		densiteIni = 0.9;
 		repousse = 0.001;
-		incendie = 0.0001;
+		incendie = 0.001;
 		
 		agents = new ArrayList<Agent>();
 		
@@ -185,7 +185,7 @@ public class Island {
 	public void step ( )
 	{
 		stepWorld();
-		stepAgents();
+		//stepAgents();
 		
 		if ( buffering && cloneBuffer )
 		{
@@ -236,6 +236,7 @@ public class Island {
 	
 	public void stepWorld() // world THEN agents
 	{
+		this.ForestUpdate();
 		//this.ecoulement();
 	}
 	
@@ -276,17 +277,18 @@ public class Island {
 		}
 	}
 	
-	public void InitForet(double densite) {
+	public void InitForet(double densiteIni) {
 		
 		for (int x = 0 ; x != _dx ; x++ ) {
 	    	for (int y = 0 ; y != _dy ; y++ ) {
-	    		if ( Buffer0[x][y].moisture* densite >= Math.random()*100 && Buffer0[x][y].type >0) { 
+	    		if ( Buffer0[x][y].moisture*densiteIni >= Math.random()*100 && Buffer0[x][y].type >0) { 
 	    			Buffer0[x][y].arbre=1; // tree
 	    			Buffer0[x][y].type = 2;
+	    			
 	    		}
 	    	}
 	    }
-		
+		Buffer0[_dx/2][_dy/2].type = 3;
 	}
 	
 	void ForestUpdate() {
@@ -323,7 +325,7 @@ public class Island {
 				else if((this.Buffer0[x][y].type == 0 ||this.Buffer0[x][y].type == 3) && repousse >= Math.random()) {
 					this.Buffer1[x][y].type = 1;
 				}
-				else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()) {
+				else if(this.Buffer0[x][y].type == 1 && incendie >= Math.random()*Buffer0[x][y].temp) {
 					this.Buffer1[x][y].type = 2;										
 				}
 				else if(this.Buffer0[x][y].type == 1 && this.Buffer1[x][y].type== 2){//arbre devenu en feu a cette itération
@@ -399,7 +401,7 @@ public class Island {
 		for ( int i = 0 ; i != agents.size() ; i++ )
 			image.setPixel(agents.get(i).get_x(), agents.get(i).get_y(), agents.get(i).get_redValue(), agents.get(i).get_greenValue(), agents.get(i).get_blueValue());
 	}
-	public void InitIsland(ImageBuffer hm, ImageBuffer mm,ImageBuffer tm, double densite) {
+	public void InitIsland(ImageBuffer hm, ImageBuffer mm,ImageBuffer tm) {
 		
 		for ( int x = 0 ; x != _dx ; x++ ) {
 			for ( int y = 0 ; y != _dy ; y++ ) //on parcourt les 3 images données et on remplit la matrice de cases en fonction
@@ -429,7 +431,7 @@ public class Island {
 			}
 			
 		}
-		InitForet(densite);
+		InitForet(densiteIni);
 		
 		
 		
