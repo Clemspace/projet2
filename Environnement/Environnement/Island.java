@@ -183,7 +183,7 @@ public class Island {
 	public void step ( )
 	{
 		stepWorld();
-		//stepAgents();
+		stepAgents();
 		
 		if ( buffering && cloneBuffer )
 		{

@@ -5,6 +5,7 @@ import java.io.File;
 
 import Agents.PredatorAgent;
 import Agents.PreyAgent;
+import Agents.Scavenger;
 import Environnement.Case;
 import Environnement.Island;
 import toolbox.CAtoolbox;
@@ -19,8 +20,8 @@ public class MyworldPix {
 		
 		// initialisation generale
 	    		double densite = 0.2;
-				int dx =1024;
-				int dy =1024;
+				int dx =256;
+				int dy =256;
 				
 				int displayWidth = dx;  // 200
 				int displayHeight = dy; // 200
@@ -74,10 +75,12 @@ public class MyworldPix {
 				
 
 				
-				for ( int i = 0 ; i != 10 ; i++ )
+				for ( int i = 0 ; i != 25 ; i++ )
 					world.agents.add(new PreyAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
-				for ( int i = 0 ; i != 10 ; i++ )
+				for ( int i = 0 ; i != 25 ; i++ )
 					world.agents.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
+				for ( int i = 0 ; i != 20 ; i++ )
+					world.agents.add(new Scavenger((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 				
 			    // mise a jour de l'�tat du monde
 				

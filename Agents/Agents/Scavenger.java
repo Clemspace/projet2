@@ -35,13 +35,47 @@ public class Scavenger extends Agent{
 					_world.agents.remove(_world.agents.get(i));// on supprime le cadavre consomm�
 				}
 			}
-				
-			}
-			if ( _x == _world.agents.get(i)._x && _y == _world.agents.get(i)._y) {    // proie sur la même case que prédateur, 
-																							  //nourrit le prédateur
-				
-				
-			}
+					
 		}
+		// ... A COMPLETER
 
+				int cellColor[] = _world.getCellState(_x, _y);
+
+				cellColor[redId]   = 25;
+				cellColor[greenId] = 25;
+				cellColor[blueId]  = 25;
+
+				_world.setCellState(_x, _y, cellColor);
+				
+				
+			
+					
+				
+				if(Chasse()) { //comportement de chasse, va chercher a fuir
+					_orient= Voisinage()+2;
+					
+				}
+				else if (Math.random() > 0.5) // au hasard
+					_orient = (_orient + 1) % 4;
+				else 
+					_orient = (_orient - 1 + 4) % 4;
+
+				// met a jour: la position de l'agent (depend de l'orientation)
+				switch (_orient) {
+				case 0: // nord	
+					_y = (_y - 6 + _world.getHeight()) % _world.getHeight();
+					break;
+				case 1: // est
+					_x = (_x + 6 + _world.getWidth()) % _world.getWidth();
+					break;
+				case 2: // sud
+					_y = (_y + 6 + _world.getHeight()) % _world.getHeight();
+					break;
+				case 3: // ouest
+					_x = (_x - 6 + _world.getWidth()) % _world.getWidth();
+					break;
+				}
+	}
 }
+
+
