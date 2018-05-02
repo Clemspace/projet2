@@ -6,7 +6,7 @@ public class PreyAgent extends Agent {
 	boolean _alive;
 	boolean chasse;
 	int corpse;
-	
+	int faim;
 	public PreyAgent( int __x, int __y, Island __w )
 	{
 		super(__x,__y,__w);
@@ -15,19 +15,20 @@ public class PreyAgent extends Agent {
 		_greenValue = 128;
 		_blueValue = 255;
 		
-		_alive = true;
+		
 		chasse = false;
 		corpse = 0;
+		faim = 150;
 	}
 	
 	public void step( )
 	{
 		// met a jour l'agent
-		for (int i = 0; i!=_world.Predateurs.size();i++) {
-			if ( _x == _world.Predateurs.get(i)._x && _y == _world.Predateurs.get(i)._y) {    // proie sur la même case que prédateur, 
+		for (int i = 0; i!=_world.agents.size();i++) {
+			if ( _x == _world.agents.get(i)._x && _y == _world.agents.get(i)._y) {    // proie sur la même case que prédateur, 
 																							  //nourrit le prédateur
 				_alive = false;
-				_world.Predateurs.get(i).faim =50; 
+				_world.agents.get(i).faim =+100; 
 				
 				
 			}

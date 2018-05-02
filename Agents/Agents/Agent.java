@@ -11,6 +11,10 @@ public abstract class Agent {
 	static int greenId = 1;
 	static int blueId  = 2;
 	
+	boolean _alive;
+	int faim;
+
+	
 	int 	_x;
 	int 	_y;
 	int 	_orient;
@@ -38,47 +42,30 @@ public abstract class Agent {
 
 
 public int Voisinage() {//identifie la direction de la première intrusion trouvée
-	if(getClass().getName()=="PreyAgent") {
 	
-		for ( int i = 0 ; i != _world.Predateurs.size() ; i++ ){
+	
+		for ( int i = 0 ; i != _world.agents.size() ; i++ ){
 			
-				if(_world.Predateurs.get(i)._x ==_x && _world.Predateurs.get(i)._y ==_y-1 ){ //intrus en haut  
+			if(getClass().getName()!=_world.agents.get(i).getClass().getName()) {
+			
+				if(_world.agents.get(i)._x ==_x && _world.agents.get(i)._y ==_y-1 ){ //intrus en haut  
 					return 0;
 				}
-				else if(_world.Predateurs.get(i)._x ==_x+1 && _world.Predateurs.get(i)._y ==_y) {//intrus a l'est
+				else if(_world.agents.get(i)._x ==_x+1 && _world.agents.get(i)._y ==_y) {//intrus a l'est
 					return 1;	
 				}
-				else if(_world.Predateurs.get(i)._x ==_x && _world.Predateurs.get(i)._y ==_y+1) {//intrus au sud
+				else if(_world.agents.get(i)._x ==_x && _world.agents.get(i)._y ==_y+1) {//intrus au sud
 					return 2;	
 				}
-				else if(_world.Predateurs.get(i)._x ==_x-1 && _world.Predateurs.get(i)._y ==_y) {//intrus a l'ouest
+				else if(_world.agents.get(i)._x ==_x-1 && _world.agents.get(i)._y ==_y) {//intrus a l'ouest
 					return 3;	
 				}
 			}
-	}
-		
-		if(getClass().getName()=="PredatorAgent") {
-			
-			for ( int i = 0 ; i != _world.Proies.size() ; i++ ){
-					if(_world.Proies.get(i)._x ==_x && _world.Proies.get(i)._y ==_y-1 ){ //intrus en haut  
-						return 0;
-					}
-					else if(_world.Proies.get(i)._x ==_x+1 && _world.Proies.get(i)._y ==_y) {//intrus a l'est
-						return 1;	
-					}
-					else if(_world.Proies.get(i)._x ==_x && _world.Proies.get(i)._y ==_y+1) {//intrus au sud
-						return 2;	
-					}
-					else if(_world.Proies.get(i)._x ==_x-1 && _world.Proies.get(i)._y ==_y) {//intrus a l'ouest
-						return 3;	
-					}
-				}
-			
-		}
-		
 	
-	 return -1;
-}
+		}	
+	
+		return -1;
+	}
 
  public boolean Chasse() {
 	return (Voisinage() != -1);

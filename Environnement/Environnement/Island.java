@@ -37,8 +37,6 @@ public class Island {
 	int activeIndex;
 	
 	public ArrayList<Agent> agents;
-	public ArrayList<PredatorAgent> Predateurs;
-	public ArrayList<PreyAgent> Proies;
 	
 
 

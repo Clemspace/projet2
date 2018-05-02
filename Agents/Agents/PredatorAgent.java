@@ -7,6 +7,7 @@ public class PredatorAgent extends Agent {
 	boolean _predator;
 	int faim;
 	boolean chasse;
+	int corpse;
 	
 	public PredatorAgent( int __x, int __y, Island __w )
 	{
@@ -18,12 +19,12 @@ public class PredatorAgent extends Agent {
 	
 	public void step( ){
 		// met a jour l'agent
-		for (int i = 0; i!=_world.Predateurs.size();i++) { //tue les prédateurs affamés
-				_world.Predateurs.get(i).faim--;
-				if(_world.Predateurs.get(i).faim==0) { 
+		for (int i = 0; i!=_world.agents.size();i++) { //tue les prédateurs affamés
+				_world.agents.get(i).faim--;
+				if(_world.agents.get(i).faim==0) { 
 				
-					_world.Predateurs.remove(this);
-					i--;
+					_world.agents.remove(this);
+					
 				}
 			
 		}
