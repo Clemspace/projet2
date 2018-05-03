@@ -235,8 +235,8 @@ public class Island {
 	public void stepWorld() // world THEN agents
 	{
 		
-		
-		//this.ForestUpdate(); forêt déterministe
+		 //this.ForestAlea(); //forêt stochastique
+		this.ForestUpdate(); //forêt déterministe
 		//this.ecoulement(); écoulement marche de manière non optimale
 	}
 	
@@ -322,15 +322,21 @@ public class Island {
 					}
 					ResetBiome(this.Buffer1[x][y]);				}
 				
-				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3) && repousse >= Math.random()&&(Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35)) {
+				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3 && this.Buffer0[x][y].type!=2) && repousse >= Math.random()&&(Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35)) {
 					this.Buffer1[x][y].type = 2;
+					this.Buffer1[x][y].arbre = 1;
 				}
-				else if(this.Buffer0[x][y].type == 2 && incendie >= Math.random()*Buffer0[x][y].temp) {
+				else if(this.Buffer0[x][y].type == 2 && incendie <= Math.random()) {
 					this.Buffer1[x][y].type = 3;										
 				}
 				else if(this.Buffer0[x][y].type == 2 && this.Buffer1[x][y].type== 3){//arbre devenu en feu a cette itÃ©ration
 					this.Buffer1[x][y].type = 3;
+					this.Buffer1[x][y].arbre = 0;
 				
+				}
+				else if (this.Buffer0[x][y].type == 2 && this.Buffer0[x][y].arbre<100 ){
+					Buffer1[x][y].arbre = Buffer0[x][y].arbre+1;
+					System.out.println(Buffer1[x][y].arbre + Buffer0[x][y].arbre);
 				}
 				
 				
@@ -341,8 +347,8 @@ public class Island {
 		
 		for ( int x1 = 0 ; x1 != Buffer0.length ; x1++ ) {
 			for ( int y2 = 0 ; y2 != Buffer0[0].length ; y2++ ) {
-				if(Buffer0[x1][y2].type==1){
-					
+				if(Buffer0[x1][y2].type==2){
+					Buffer0[x1][y2].arbre++;
 				}
 				Buffer0[x1][y2] = Buffer1[x1][y2];
 				
