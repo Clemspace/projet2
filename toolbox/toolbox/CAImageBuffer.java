@@ -78,7 +78,7 @@ public class CAImageBuffer extends ImageBuffer {
 					this.setPixel(x,y,150+cells[x][y].hauteur,(int)(255-cells[x][y].moisture),0);
 					break;
 				case 2: //CAS FORET
-					this.setPixel(x,y,0,200/*-cells[x][y].arbre*/,0);
+					this.setPixel(x,y,0,200-cells[x][y].arbre,0);
 					break;
 				case 3: //CAS FEU	
 					this.setPixel(x,y,254,50,0);

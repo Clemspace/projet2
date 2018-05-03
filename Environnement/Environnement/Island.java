@@ -281,10 +281,12 @@ public class Island {
 		
 		for (int x = 0 ; x != _dx ; x++ ) {
 	    	for (int y = 0 ; y != _dy ; y++ ) {
-	    	boolean arbre =  Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35; //on utlise cette méthode pour avoir moins d'arbres dans des cas de hauteur ou chaleur extreme
+	    	boolean arbre =  Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -0.8*Buffer0[x][y].temp >= Math.random()*40; //on utlise cette méthode pour avoir moins d'arbres dans des cas de hauteur ou chaleur extreme
 	    		if (arbre && Buffer0[x][y].type >0) { 
 	    			Buffer0[x][y].arbre=1; // tree
 	    			Buffer0[x][y].type = 2;
+	    			Buffer1[x][y].arbre=1; // tree
+	    			Buffer1[x][y].type = 2;
 	    			
 	    		}
 	    	}
@@ -320,7 +322,7 @@ public class Island {
 							
 						}
 					}
-					ResetBiome(this.Buffer1[x][y]);				}
+								}
 				
 				else if((this.Buffer0[x][y].type >0 && this.Buffer0[x][y].type!=3 && this.Buffer0[x][y].type!=2) && repousse >= Math.random()&&(Buffer0[x][y].moisture - 0.4*Buffer0[x][y].hauteur -Buffer0[x][y].temp >= Math.random()*35)) {
 					this.Buffer1[x][y].type = 2;
@@ -336,7 +338,7 @@ public class Island {
 				}
 				else if (this.Buffer0[x][y].type == 2 && this.Buffer0[x][y].arbre<100 ){
 					Buffer1[x][y].arbre = Buffer0[x][y].arbre+1;
-					System.out.println(Buffer1[x][y].arbre + Buffer0[x][y].arbre);
+					
 				}
 				
 				
@@ -351,6 +353,8 @@ public class Island {
 					Buffer0[x1][y2].arbre++;
 				}
 				Buffer0[x1][y2] = Buffer1[x1][y2];
+				System.out.println(Buffer1[x1][y2].arbre + Buffer0[x1][y2].arbre);
+				ResetBiome(this.Buffer0[x1][y2]);	
 				
 			}
 		}
